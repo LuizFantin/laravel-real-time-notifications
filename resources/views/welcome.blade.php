@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
@@ -128,5 +129,16 @@
                 </div>
             </div>
         </div>
+
+        <script src="{{ asset('js/app.js') }}"></script>
+
+        <script>
+            Echo.private('events')
+                .listen('RealTimeMessage', (e) => console.log('Private RealTimeMessage: ' + e.message));
+            Echo.private('App.Models.User.1')
+            .notification((notification) => {
+                console.log(notification.message);
+            });
+        </script>
     </body>
 </html>
